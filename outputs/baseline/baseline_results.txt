@@ -1,0 +1,22 @@
+Transformers Day 4 — Baseline Results
+=====================================
+Encoder: distilbert-base-uncased
+Train samples: 1600
+Test samples: 400
+Embedding size: 768
+Accuracy: 0.8525
+Macro F1: 0.8525
+
+Classification report:
+              precision    recall  f1-score   support
+
+    negative     0.8579    0.8450    0.8514       200
+    positive     0.8473    0.8600    0.8536       200
+
+    accuracy                         0.8525       400
+   macro avg     0.8526    0.8525    0.8525       400
+weighted avg     0.8526    0.8525    0.8525       400
+
+Confusion matrix:
+[[169  31]
+ [ 28 172]]
