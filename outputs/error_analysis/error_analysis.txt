@@ -1,0 +1,111 @@
+Transformers Day 7 - Error Analysis
+===================================
+
+Summary
+-------
+Validation samples: 400
+Total errors: 44
+False Positives: 19
+False Negatives: 25
+
+Text length analysis
+--------------------
+Average all text length: 54.1
+Average error text length: 46.4
+Average FP text length: 49.4
+Average FN text length: 44.1
+
+False Positive examples
+-----------------------
+
+Text: could have been much better
+True label: negative
+Predicted label: positive
+Positive probability: 0.9895
+Text length: 27
+
+Text: sheridan 's take on the author 's schoolboy memoir ... is a rather toothless take on a hard young life .
+True label: negative
+Predicted label: positive
+Positive probability: 0.9027
+Text length: 104
+
+Text: its digs at modern society are all things we 've seen before .
+True label: negative
+Predicted label: positive
+Positive probability: 0.9966
+Text length: 62
+
+Text: puzzle his most ardent fans
+True label: negative
+Predicted label: positive
+Positive probability: 0.9965
+Text length: 27
+
+Text: increasingly diverse
+True label: negative
+Predicted label: positive
+Positive probability: 0.9949
+Text length: 20
+
+
+False Negative examples
+-----------------------
+
+Text: ends or just ca n't tear himself away from the characters
+True label: positive
+Predicted label: negative
+Negative probability: 0.8930
+Text length: 57
+
+Text: may be more genial than ingenious , but it gets the job done
+True label: positive
+Predicted label: negative
+Negative probability: 0.7937
+Text length: 60
+
+Text: even the bull gets recycled .
+True label: positive
+Predicted label: negative
+Negative probability: 0.9963
+Text length: 29
+
+Text: never mind all that ; the boobs are fantasti
+True label: positive
+Predicted label: negative
+Negative probability: 0.9845
+Text length: 44
+
+Text: the screenplay or something
+True label: positive
+Predicted label: negative
+Negative probability: 0.9748
+Text length: 27
+
+
+Observations
+------------
+1. Error texts are shorter on average than the full validation set.
+   Average error length is 46.4 characters,
+   compared with 54.1 characters for all texts.
+
+2. False Negative texts are the shortest error group on average
+   (44.1 characters). Some errors occur on
+   short or contextually incomplete phrases where sentiment is difficult
+   to determine from the fragment alone.
+
+3. Indirect, mixed and contrastive sentiment can cause errors.
+   Phrases containing constructions such as "but" or conditional wording
+   may contain both positive and negative signals.
+
+4. Individual sentiment-bearing words can be misleading when their meaning
+   depends on the surrounding context. For example, a positive-looking word
+   such as "better" does not necessarily make the whole phrase positive.
+
+5. Some incorrect predictions have very high confidence. This shows that
+   a high softmax probability does not guarantee that the predicted class
+   is correct.
+
+6. The model produced more False Negatives than False Positives:
+   25 versus 19. It therefore made slightly more errors where
+   positive texts were classified as negative.

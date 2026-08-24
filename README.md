@@ -2,6 +2,13 @@
 
 Проект по трансформерам на задаче классификации тональности текста.
 
+Используется датасет SST-2 с двумя классами:
+
+* `0` - negative;
+* `1` - positive.
+
+Основная модель: `distilbert-base-uncased`.
+
 ## Этапы
 
 ### День 1 - Токенизация
@@ -54,13 +61,20 @@
 * реализация `predict_baseline`;
 * batch inference;
 * сравнение моделей на одинаковой validation выборке;
-* построение confusion matrix;
+* построение confusion matrix для обеих моделей;
 * сравнение accuracy и macro F1;
 * сохранение итогового отчёта.
 
-## Результаты
+### День 7 - Анализ ошибок и демо
 
-Модель: `distilbert-base-uncased`
+* поиск False Positive и False Negative;
+* анализ ошибочных предсказаний и уверенности модели;
+* сравнение длины ошибочных и всех текстов;
+* сохранение полного анализа ошибок;
+* создание Gradio-приложения;
+* локальный inference через fine-tuned DistilBERT.
+
+## Результаты
 
 Данные:
 
@@ -81,17 +95,23 @@
 * абсолютное улучшение Macro F1: `0.0375`;
 * относительное улучшение Macro F1: `4.40%`.
 
+Fine-tuned модель допустила 44 ошибки на 400 validation-примерах:
+
+* False Positives: 19;
+* False Negatives: 25.
+
 Полные результаты находятся в:
 
 ```text
 outputs/baseline/baseline_results.txt
 outputs/fine_tuned/fine_tuned_results.txt
 outputs/comparison/comparison_results.txt
+outputs/error_analysis/error_analysis.txt
 ```
 
-## Окружение и запуск
+## Окружение
 
-Создание conda-окружения:
+Создание Conda-окружения:
 
 ```bash
 conda create -n transformers_overall python=3.10
@@ -110,17 +130,41 @@ pip install -r requirements.txt
 python -m ipykernel install --user --name transformers_overall --display-name "Python (transformers_overall)"
 ```
 
-Запуск Jupyter:
-
-```bash
-jupyter notebook
-```
-
-В notebook необходимо выбрать kernel:
+Для работы с notebook в VS Code необходимо выбрать kernel:
 
 ```text
 Python (transformers_overall)
 ```
+
+## Запуск Gradio-приложения
+
+Перед запуском должна существовать локальная fine-tuned модель:
+
+```text
+models/fine_tuned_model/
+```
+
+Она создаётся в День 5 и не хранится в Git.
+
+Активируйте окружение:
+
+```bash
+conda activate transformers_overall
+```
+
+Запустите приложение из корня проекта:
+
+```bash
+python app.py
+```
+
+После запуска интерфейс будет доступен по адресу:
+
+```text
+http://127.0.0.1:7860
+```
+
+Приложение принимает английский текст и выводит вероятности классов `Negative` и `Positive`.
 
 ## Структура проекта
 
@@ -132,6 +176,11 @@ transformers_overall/
       train.csv
       validation.csv
 
+  models/
+    baseline/
+      logistic_regression.joblib
+    fine_tuned_model/
+
   notebooks/
     transformers_day01.ipynb
     transformers_day02.ipynb
@@ -139,19 +188,28 @@ transformers_overall/
     transformers_day04.ipynb
     transformers_day05.ipynb
     transformers_day06.ipynb
+    transformers_day07.ipynb
 
   outputs/
     attention/
+
     baseline/
       baseline_results.txt
+
     fine_tuned/
       fine_tuned_results.txt
       training_history.csv
+
     comparison/
       comparison_results.txt
       confusion_matrix_baseline.png
       confusion_matrix_fine_tuned.png
 
+    error_analysis/
+      error_analysis.txt
+      error_examples.csv
+
+  app.py
   .gitignore
   README.md
   requirements.txt
