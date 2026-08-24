@@ -1,0 +1,19 @@
+Transformers Day 5 — Fine-tuning Results
+=========================================
+
+Model: distilbert-base-uncased
+Train samples: 1600
+Validation samples: 400
+Epochs: 3
+Batch size: 16
+Learning rate: 2e-05
+
+Best epoch: 3
+Validation Accuracy: 0.8900
+Validation Macro F1: 0.8900
+
+Baseline Accuracy: 0.8525
+Baseline Macro F1: 0.8525
+
+Absolute F1 improvement: 0.0375
+Relative F1 improvement: 4.40%

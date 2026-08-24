@@ -1,0 +1,47 @@
+Transformers Day 6 - Model Comparison
+=====================================
+
+Fine-tuned Model
+----------------
+Accuracy: 0.8900
+Macro F1: 0.8900
+
+Classification report:
+              precision    recall  f1-score   support
+
+    negative     0.8786    0.9050    0.8916       200
+    positive     0.9021    0.8750    0.8883       200
+
+    accuracy                         0.8900       400
+   macro avg     0.8904    0.8900    0.8900       400
+weighted avg     0.8904    0.8900    0.8900       400
+
+
+Confusion matrix:
+[[181  19]
+ [ 25 175]]
+
+Baseline Model
+--------------
+Accuracy: 0.8525
+Macro F1: 0.8525
+
+Classification report:
+              precision    recall  f1-score   support
+
+    negative     0.8579    0.8450    0.8514       200
+    positive     0.8473    0.8600    0.8536       200
+
+    accuracy                         0.8525       400
+   macro avg     0.8526    0.8525    0.8525       400
+weighted avg     0.8526    0.8525    0.8525       400
+
+
+Confusion matrix:
+[[169  31]
+ [ 28 172]]
+
+Comparison
+----------
+Absolute F1 difference: 0.0375
+Relative F1 improvement: 4.40%
