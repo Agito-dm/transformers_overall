@@ -109,7 +109,29 @@ outputs/comparison/comparison_results.txt
 outputs/error_analysis/error_analysis.txt
 ```
 
-## Окружение
+## Клонирование и окружение
+
+Для хранения весов fine-tuned модели используется Git LFS.
+
+Перед клонированием нужно убедиться, что Git LFS установлен:
+
+```bash
+git lfs install
+```
+
+Клонирование репозитория:
+
+```bash
+git clone https://github.com/Agito-dm/transformers_overall.git
+cd transformers_overall
+```
+
+При обычном клонировании Git LFS загружает веса автоматически.
+При необходимости их можно получить вручную:
+
+```bash
+git lfs pull
+```
 
 Создание Conda-окружения:
 
@@ -136,25 +158,32 @@ python -m ipykernel install --user --name transformers_overall --display-name "P
 Python (transformers_overall)
 ```
 
-## Запуск Gradio-приложения
+## Модели
 
-Перед запуском должна существовать локальная fine-tuned модель:
+Проект содержит обязательные артефакты моделей:
 
 ```text
-models/fine_tuned_model/
+models/
+  baseline/
+    logistic_regression.joblib
+
+  fine_tuned_model/
+    config.json
+    model.safetensors
+    tokenizer.json
+    tokenizer_config.json
 ```
 
-Она создаётся в День 5 и не хранится в Git.
+`model.safetensors` хранится через Git LFS.
 
-Активируйте окружение:
+Baseline-модель используется в Дне 6 для сравнения, а fine-tuned модель используется в Днях 6–7 и Gradio-приложении.
+
+## Запуск Gradio-приложения
+
+Из корня проекта нужно выполнить:
 
 ```bash
 conda activate transformers_overall
-```
-
-Запустите приложение из корня проекта:
-
-```bash
 python app.py
 ```
 
@@ -180,6 +209,10 @@ transformers_overall/
     baseline/
       logistic_regression.joblib
     fine_tuned_model/
+      config.json
+      model.safetensors
+      tokenizer.json
+      tokenizer_config.json
 
   notebooks/
     transformers_day01.ipynb
@@ -214,5 +247,3 @@ transformers_overall/
   README.md
   requirements.txt
 ```
-
-Обученные модели сохраняются локально в `models/` и не добавляются в Git.

@@ -28,14 +28,27 @@ desktop.ini
 *.tmp
 *.temp
 
-# Model weights and checkpoints
-models/
+# Model checkpoints not required for submission
 checkpoints/
 outputs/checkpoints/
 *.pt
 *.pth
 *.ckpt
 *.safetensors
+
+# Keep only required model artifacts
+models/*
+!models/baseline/
+!models/fine_tuned_model/
+
+models/baseline/*
+!models/baseline/logistic_regression.joblib
+
+models/fine_tuned_model/*
+!models/fine_tuned_model/config.json
+!models/fine_tuned_model/model.safetensors
+!models/fine_tuned_model/tokenizer.json
+!models/fine_tuned_model/tokenizer_config.json
 
 # Hugging Face cache
 .cache/
