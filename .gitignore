@@ -46,10 +46,13 @@ models/baseline/*
 
 models/fine_tuned_model/*
 !models/fine_tuned_model/config.json
-!models/fine_tuned_model/model.safetensors
+!models/fine_tuned_model/model-*.safetensors
+!models/fine_tuned_model/model.safetensors.index.json
 !models/fine_tuned_model/tokenizer.json
 !models/fine_tuned_model/tokenizer_config.json
 
 # Hugging Face cache
 .cache/
 huggingface/
+# Gradio
+.gradio/

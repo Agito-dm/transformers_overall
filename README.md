@@ -111,26 +111,11 @@ outputs/error_analysis/error_analysis.txt
 
 ## Клонирование и окружение
 
-Для хранения весов fine-tuned модели используется Git LFS.
-
-Перед клонированием нужно убедиться, что Git LFS установлен:
-
-```bash
-git lfs install
-```
-
 Клонирование репозитория:
 
 ```bash
 git clone https://github.com/Agito-dm/transformers_overall.git
 cd transformers_overall
-```
-
-При обычном клонировании Git LFS загружает веса автоматически.
-При необходимости их можно получить вручную:
-
-```bash
-git lfs pull
 ```
 
 Создание Conda-окружения:
@@ -169,12 +154,17 @@ models/
 
   fine_tuned_model/
     config.json
-    model.safetensors
+    model-00001-of-00005.safetensors
+    model-00002-of-00005.safetensors
+    model-00003-of-00005.safetensors
+    model-00004-of-00005.safetensors
+    model-00005-of-00005.safetensors
+    model.safetensors.index.json
     tokenizer.json
     tokenizer_config.json
 ```
 
-`model.safetensors` хранится через Git LFS.
+Fine-tuned модель сохранена в sharded safetensors формате, чтобы все обязательные веса находились непосредственно в Git-репозитории.
 
 Baseline-модель используется в Дне 6 для сравнения, а fine-tuned модель используется в Днях 6–7 и Gradio-приложении.
 
@@ -210,7 +200,12 @@ transformers_overall/
       logistic_regression.joblib
     fine_tuned_model/
       config.json
-      model.safetensors
+      model-00001-of-00005.safetensors
+      model-00002-of-00005.safetensors
+      model-00003-of-00005.safetensors
+      model-00004-of-00005.safetensors
+      model-00005-of-00005.safetensors
+      model.safetensors.index.json
       tokenizer.json
       tokenizer_config.json
 
